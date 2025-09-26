@@ -1,0 +1,260 @@
+/* General Styles */
+:root {
+    --primary-color: #007bff; /* Blue */
+    --secondary-color: #6c757d; /* Gray */
+    --success-color: #28a745; /* Green */
+    --danger-color: #dc3545; /* Red */
+    --bg-color: #f4f7fa;
+    --card-bg: #ffffff;
+    --border-color: #dee2e6;
+    --font-color: #343a40;
+    --radius: 8px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 30px 0;
+}
+
+/* --- Card and Layout Styles --- */
+
+.auth-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    flex: 1 1 350px; /* Responsive resizing for cards */
+}
+
+/* --- Input and Button Styles --- */
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-field {
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 1rem;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn:hover {
+    filter: brightness(1.1);
+}
+
+.status-text {
+    font-weight: bold;
+    color: var(--danger-color);
+    margin-top: 10px;
+}
+#status:has(i.online) {
+    color: var(--success-color);
+}
+
+
+/* --- Call Section Styles (Main Layout) --- */
+
+.call-section {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.online-users-panel {
+    flex: 1 1 300px; 
+}
+
+.user-list-container {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    max-height: 400px;
+    overflow-y: auto;
+    background: var(--card-bg);
+    padding: 10px;
+}
+
+.user-item {
+    padding: 10px;
+    border-bottom: 1px solid var(--bg-color);
+    cursor: pointer;
+    transition: background-color 0.1s;
+    font-weight: 500;
+}
+
+.user-item:last-child {
+    border-bottom: none;
+}
+
+.user-item:hover {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
+/* --- Video Stream Styles --- */
+
+.video-container {
+    flex: 2 1 600px; /* Takes more space */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.video-box {
+    flex: 1 1 300px;
+    text-align: center;
+}
+
+.video-feed {
+    width: 100%;
+    max-width: 450px;
+    height: 250px;
+    background-color: #343a40;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: block;
+    margin: 10px auto;
+}
+
+/* --- Incoming Call Box --- */
+
+.incoming-call-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card-bg);
+    border: 3px solid var(--primary-color);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+}
+
+.incoming-call-box p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.call-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#hangup-btn {
+    display: block;
+    margin: 20px auto;
+    width: 200px;
+}
+
+/* --- Responsive Adjustments (Mobile First) --- */
+
+@media (max-width: 768px) {
+    .container {
+        margin: 20px 10px;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .auth-section {
+        flex-direction: column;
+    }
+
+    .card {
+        flex: 1 1 100%;
+    }
+
+    .call-section {
+        flex-direction: column;
+    }
+    
+    .video-container {
+        flex-direction: column;
+    }
+
+    .video-box {
+        flex: 1 1 100%;
+    }
+}
