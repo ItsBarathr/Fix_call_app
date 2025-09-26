@@ -1,4 +1,8 @@
-const socket = io();
+const RENDER_URL = 'https://fix-call-app.onrender.com/';
+
+const socket = io(RENDER_URL, { 
+    transports: ["websocket"] 
+});
 
 // UI Elements
 const myIdInput = document.getElementById('myIdInput');
