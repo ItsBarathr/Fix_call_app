@@ -2,60 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Fixed Number WebRTC Call</title>
-    <style>
-        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; }
-        #localVideo, #remoteVideo { border: 1px solid black; width: 450px; height: 300px; margin: 10px; background: #ddd; }
-        .video-container { display: flex; }
-        #user-list { border: 1px solid #ccc; padding: 10px; max-height: 200px; overflow-y: scroll; width: 450px; }
-        .user-item { cursor: pointer; padding: 5px; border-bottom: 1px dotted #eee; }
-        .online { color: green; font-weight: bold; }
-        .offline { color: red; }
-        #new-registration, #login-section { margin-bottom: 20px; padding: 10px; border: 1px dashed #ccc; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC Fixed-Call App</title>
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
-    <h1>Fixed Number WebRTC Call Demo</h1>
+    <div class="container">
+        <h1>WebRTC Fixed-Call Demo 📞</h1>
 
-    <h2>New User Registration</h2>
-    <div id="new-registration">
-        <input type="text" id="regName" placeholder="Name (e.g., New User)">
-        <input type="email" id="regEmail" placeholder="Email">
-        <input type="password" id="regPassword" placeholder="Password">
-        <button onclick="registerNewUser()">Register</button>
-        <p id="regMessage" style="color: blue;"></p>
-    </div>
+        <section class="auth-section">
+            <div class="card registration-card">
+                <h2>New User Registration</h2>
+                <div class="input-group">
+                    <input type="text" id="regName" placeholder="Name (e.g., Jane Doe)" class="input-field">
+                    <input type="email" id="regEmail" placeholder="Email" class="input-field">
+                    <input type="password" id="regPassword" placeholder="Password" class="input-field">
+                    <button onclick="registerNewUser()" class="btn btn-primary">Register</button>
+                    <p id="regMessage" class="message-text"></p>
+                </div>
+            </div>
 
-    <hr>
+            <div class="card login-card">
+                <h2>User Login</h2>
+                <div class="input-group">
+                    <input type="text" id="myIdInput" placeholder="Enter your Fixed ID (e.g., 1001)" class="input-field">
+                    <button onclick="loginId()" class="btn btn-secondary">Login</button>
+                    <p id="status" class="status-text">Status: Offline</p>
+                </div>
+            </div>
+        </section>
 
-    <h2>User Login</h2>
-    <div id="login-section">
-        <input type="text" id="myIdInput" placeholder="Enter your Fixed ID (e.g., 1001)">
-        <button onclick="loginId()">Login ID</button>
-        <p id="status">Status: Offline</p>
-    </div>
+        <hr class="divider">
 
-    <div class="video-container">
-        <div>
-            <h2>Local Video</h2>
-            <video id="localVideo" autoplay muted></video>
+        <section class="call-section">
+            <div class="online-users-panel">
+                <h2>Online Users (Click to Call)</h2>
+                <div id="user-list" class="user-list-container">
+                    Please log in to see online users.
+                </div>
+            </div>
+
+            <div class="video-container">
+                <div class="video-box">
+                    <h3>Local Video</h3>
+                    <video id="localVideo" autoplay muted class="video-feed"></video>
+                </div>
+                <div class="video-box">
+                    <h3>Remote Video</h3>
+                    <video id="remoteVideo" autoplay class="video-feed"></video>
+                </div>
+            </div>
+        </section>
+
+        <div id="incoming-call-box" class="incoming-call-box hidden">
+            <p id="caller-info"></p>
+            <div class="call-actions">
+                <button onclick="acceptCall()" class="btn btn-success">Accept</button>
+                <button onclick="rejectCall()" class="btn btn-danger">Reject</button>
+            </div>
         </div>
-        <div>
-            <h2>Remote Video</h2>
-            <video id="remoteVideo" autoplay></video>
-        </div>
+        
+        <button id="hangup-btn" onclick="hangUp()" class="btn btn-danger hidden">Hang Up</button>
     </div>
-    
-    <h2>Online Users (Click to Call)</h2>
-    <div id="user-list">Please log in to see online users.</div>
-
-    <div id="incoming-call-box" style="display: none; border: 2px solid orange; padding: 10px; margin-top: 20px;">
-        <p id="caller-info"></p>
-        <button onclick="acceptCall()">Accept</button>
-        <button onclick="rejectCall()">Reject</button>
-    </div>
-    
-    <button id="hangup-btn" onclick="hangUp()" style="display: none; margin-top: 10px;">Hang Up</button>
 
     <script src="https://unpkg.com/simple-peer@9.11.1/simplepeer.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
