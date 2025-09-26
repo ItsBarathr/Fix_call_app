@@ -15,7 +15,7 @@ let nextUserId = 1004;
 const USER_DB = {
     '1001': { id: '1001', name: 'Barath', email: 'barath@example.com', password: 'password_1' },
     '1002': { id: '1002', name: 'John', email: 'john@example.com', password: 'password_2' },
-    '1003': { id: '1003', name: 'Jane', email: 'jane@example.com', password: 'password_3' },
+    '1003': { id: '1003', name: 'friend', email: 'friend@example.com', password: 'password_3' },
 };
 
 // Runtime map: Fixed User ID -> Socket ID (ONLY for currently connected users)
