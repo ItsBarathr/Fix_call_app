@@ -26,6 +26,21 @@ let localStream = null;
 let incomingCallerId = null; 
 
 
+function setupPeerConnection(initiator, targetId) {
+    currentPeer = new SimplePeer({
+        // ...
+        config: { 
+            iceServers: [
+                // Global STUN server (free and reliable)
+                { urls: 'stun:stun.l.google.com:19302' }, 
+                // ⚠️ RECOMMENDED: Add a GLOBAL TURN server here 
+                // { urls: 'turn:YOUR_GLOBAL_TURN_SERVER_URL', username: 'user', credential: 'password' } 
+            ] 
+        }
+    });
+    // ...
+}
+
 // --- REGISTRATION & LOGIN ---
 
 async function registerNewUser() {
